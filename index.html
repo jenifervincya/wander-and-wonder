@@ -8,48 +8,133 @@
 </head>
 <body>
 
+    <!-- HEADER -->
     <header>
         <h1>Wander and Wonder</h1>
         <p>Explore the Four Houses of Hogwarts</p>
     </header>
 
+    <!-- NAVIGATION MENU (3+ links) -->
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Houses</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="#home">Home</a>
+        <a href="#houses">Houses</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
     </nav>
 
-    <div class="container">
+    <!-- MAIN CONTENT -->
+    <div class="container" id="home">
+
+        <!-- INTRO PARAGRAPH (heading + paragraph + image) -->
+        <div class="intro" id="about">
+            <h2>Welcome to Wander &amp; Wonder</h2>
+            <img src="https://jenifervincya.github.io/wander-and-wonder/front.jpg" alt="Hogwarts Castle">
+            <p>
+                Step into the magical world of Hogwarts School of Witchcraft and Wizardry.
+                Each of the four great houses has a rich history, a set of values it holds dear,
+                and generations of witches and wizards who called it home. Explore the houses
+                below and discover where your own story might belong.
+            </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- HOUSES SECTION -->
+        <h2 class="section-title" id="houses">The Four Houses</h2>
+
         <div class="post">
             <img src="g.jpeg" alt="Gryffindor Crest">
             <h2>Gryffindor</h2>
             <p><em>Founded by Godric Gryffindor</em></p>
-            <p>Gryffindor values bravery, courage, chivalry, and daring. The lion represents the house, and its colors are red and gold. Famous members include Harry Potter, Hermione Granger, and Ron Weasley. Gryffindors are known for standing up for what’s right, even when it’s difficult.</p>
+            <p>Gryffindor values bravery, courage, chivalry, and daring. The lion represents the house, and its colors are red and gold. Famous members include Harry Potter, Hermione Granger, and Ron Weasley. Gryffindors are known for standing up for what's right, even when it's difficult.</p>
         </div>
+
         <div class="post">
             <img src="slyth.jpeg" alt="Slytherin Crest">
             <h2>Slytherin</h2>
             <p><em>Founded by Salazar Slytherin</em></p>
             <p>Slytherin house values ambition, cunning, leadership, and resourcefulness. Represented by a serpent, its colors are green and silver. Notable members include Severus Snape and Draco Malfoy. Slytherins are strategic thinkers and often seek greatness at any cost.</p>
         </div>
+
         <div class="post">
             <img src="raven.jpg" alt="Ravenclaw Crest">
             <h2>Ravenclaw</h2>
             <p><em>Founded by Rowena Ravenclaw</em></p>
             <p>Ravenclaw house celebrates intelligence, wisdom, creativity, and wit. Its emblem is an eagle, and the colors are blue and bronze. Famous Ravenclaws include Luna Lovegood and Cho Chang. Ravenclaws prize learning and original thinking.</p>
         </div>
+
         <div class="post">
             <img src="huffle.jpg" alt="Hufflepuff Crest">
             <h2>Hufflepuff</h2>
             <p><em>Founded by Helga Hufflepuff</em></p>
             <p>Hufflepuff house values hard work, loyalty, patience, and fairness. Represented by a badger, its colors are yellow and black. Notable Hufflepuffs include Cedric Diggory and Nymphadora Tonks. Hufflepuffs are known for their kindness and strong moral compass.</p>
         </div>
+
+        <hr class="divider">
+
+        <!-- CONTACT FORM -->
+        <div class="form-section" id="contact">
+            <h2>Send an Owl</h2>
+            <p>Have a question or just want to share your house pride? Drop us a message below.</p>
+
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="e.g. Harry Potter">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" placeholder="wizard@hogwarts.ac.uk">
+            </div>
+
+            <div class="form-group">
+                <label for="house">Your House</label>
+                <select id="house">
+                    <option value="">— Choose your house —</option>
+                    <option value="gryffindor">Gryffindor</option>
+                    <option value="slytherin">Slytherin</option>
+                    <option value="ravenclaw">Ravenclaw</option>
+                    <option value="hufflepuff">Hufflepuff</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" placeholder="Share your thoughts..."></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="submitForm()">Send Message</button>
+
+            <p class="success-msg" id="successMsg">
+                ✓ Your message has been sent! We'll write back soon.
+            </p>
+        </div>
+
     </div>
 
+    <!-- FOOTER -->
     <footer>
         &copy; 2025 Wander and Wonder. All rights reserved.
     </footer>
+
+    <script>
+        function submitForm() {
+            var name    = document.getElementById('name').value.trim();
+            var email   = document.getElementById('email').value.trim();
+            var message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                alert('Please fill in your name, email, and message.');
+                return;
+            }
+
+            document.getElementById('successMsg').style.display = 'block';
+            document.getElementById('name').value    = '';
+            document.getElementById('email').value   = '';
+            document.getElementById('house').value   = '';
+            document.getElementById('message').value = '';
+        }
+    </script>
 
 </body>
 </html>
