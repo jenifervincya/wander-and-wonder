@@ -1,204 +1,455 @@
-/* ── Your original styles (unchanged) ── */
+/* ══════════════════════════════
+   RESET & ROOT VARIABLES
+══════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dark: #7a5e1a;
+  --parchment: #f7f0e0;
+  --parchment-dark: #e8d9b8;
+  --ink: #1a1208;
+  --ink-mid: #3b2c10;
+  --ink-light: #6b5230;
+  --gryffindor: #740001;
+  --slytherin: #1a472a;
+  --ravenclaw: #0e1a40;
+  --hufflepuff: #ecb939;
+  --cream: #fdf8ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Georgia', serif;
-    margin: 0;
-    background-color: #f0e6d2;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.8;
+  min-height: 100vh;
 }
 
-header {
-    background: url('front.jpg') no-repeat center;
-    background-size: cover;
-    color: white;
-    padding: 80px 0;
-    text-align: center;
-    text-shadow: 2px 2px 5px black;
+/* Ambient background glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(201,168,76,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(74,30,100,0.12) 0%, transparent 50%),
+    var(--ink);
+  z-index: -1;
 }
 
-header h1 {
-    font-size: 3em;
-    margin: 0;
-}
-
+/* ══════════════════════════════
+   NAVIGATION
+══════════════════════════════ */
 nav {
-    background-color: #4b2e2e;
-    display: flex;
-    justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 10, 5, 0.92);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.35);
+  backdrop-filter: blur(10px);
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
 }
 
-nav a:hover {
-    background-color: #6b4c4c;
+.nav-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.03em;
 }
 
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
 }
 
-.post {
-    margin-bottom: 40px;
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--parchment-dark);
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1.5px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
 }
 
-.post img {
-    width: 100%;
-    border-radius: 8px;
+.nav-links a:hover {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
 }
 
-.post h2 {
-    margin-top: 10px;
-    color: #4b2e2e;
+/* Mobile hamburger toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 4px;
 }
 
-.post p {
-    line-height: 1.6;
+@media (max-width: 600px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10,6,2,0.97);
+    padding: 1rem 2rem 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  .nav-links.open { display: flex; }
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #4b2e2e;
-    color: white;
-    margin-top: 40px;
+/* ══════════════════════════════
+   HERO SECTION
+══════════════════════════════ */
+#home {
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  opacity: 0.85;
+}
 
-/* ── New additions ── */
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  color: var(--gold-light);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 40px rgba(201,168,76,0.2);
+}
 
-/* Horizontal rule between sections */
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--parchment-dark);
+  opacity: 0.8;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+}
+
 .divider {
-    border: none;
-    border-top: 2px solid #e0cba8;
-    margin: 40px 0;
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 2rem;
+  opacity: 0.5;
 }
 
-/* Section heading above the house list */
-.section-title {
-    color: #4b2e2e;
-    font-size: 1.6em;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: 0.04em;
+/* ══════════════════════════════
+   SECTION HEADINGS (shared)
+══════════════════════════════ */
+.section-heading {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+  color: var(--gold-light);
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
-/* ── Intro block (heading + image + paragraph) ── */
-.intro {
-    margin-bottom: 10px;
+.section-sub {
+  text-align: center;
+  color: rgba(247,240,224,0.5);
+  font-style: italic;
+  margin-bottom: 3rem;
 }
 
-.intro h2 {
-    color: #4b2e2e;
-    font-size: 1.6em;
-    margin-bottom: 14px;
+/* ══════════════════════════════
+   HOUSES SECTION
+══════════════════════════════ */
+#houses {
+  padding: 3rem 2rem 5rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.intro img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 14px;
-    display: block;
+.house-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.intro p {
-    line-height: 1.7;
-    color: #333;
+/* Alternating image/text direction */
+.house-card.reverse { direction: rtl; }
+.house-card.reverse > * { direction: ltr; }
+
+.house-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
 }
 
-/* ── Contact form ── */
-.form-section {
-    margin-top: 10px;
-    padding: 30px;
-    background-color: #fdf7ef;
-    border: 1px solid #e0cba8;
-    border-radius: 8px;
+.house-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 }
 
-.form-section h2 {
-    color: #4b2e2e;
-    font-size: 1.5em;
-    margin-bottom: 6px;
+.house-card:hover .house-img-wrap img {
+  transform: scale(1.04);
 }
 
-.form-section > p {
-    color: #666;
-    margin-bottom: 24px;
-    line-height: 1.6;
+.house-color-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
 }
 
-/* Label + input pairs */
+.house-content {
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(15, 10, 5, 0.6);
+}
+
+.house-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.house-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  margin-bottom: 0.3rem;
+}
+
+.house-founder {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(247,240,224,0.5);
+  margin-bottom: 1rem;
+}
+
+.house-text {
+  font-size: 0.97rem;
+  color: rgba(247,240,224,0.78);
+  line-height: 1.75;
+}
+
+/* House accent color bars & tag colors */
+.g  .house-color-bar  { background: linear-gradient(to right, #740001, #ae0001); }
+.g  .house-tag        { color: #e8b4b4; }
+.sl .house-color-bar  { background: linear-gradient(to right, #1a472a, #2a623d); }
+.sl .house-tag        { color: #a8d5b5; }
+.r  .house-color-bar  { background: linear-gradient(to right, #0e1a40, #222f5b); }
+.r  .house-tag        { color: #b8c5e8; }
+.h  .house-color-bar  { background: linear-gradient(to right, #ecb939, #f0c75a); }
+.h  .house-tag        { color: #f5dd8a; }
+
+/* Responsive: stack cards on small screens */
+@media (max-width: 680px) {
+  .house-card { grid-template-columns: 1fr; }
+  .house-card.reverse { direction: ltr; }
+  .house-img-wrap { aspect-ratio: 16/9; }
+}
+
+/* ══════════════════════════════
+   ABOUT SECTION
+══════════════════════════════ */
+#about {
+  padding: 3rem 2rem 4rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#about p {
+  font-size: 1.05rem;
+  color: rgba(247,240,224,0.7);
+  max-width: 540px;
+  margin: 0 auto 1rem;
+}
+
+/* ══════════════════════════════
+   CONTACT / FORM SECTION
+══════════════════════════════ */
+#contact {
+  padding: 3rem 2rem 5rem;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.form-card {
+  background: rgba(247,240,224,0.04);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 4px;
+  padding: 2.5rem;
+}
+
+.form-card h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  margin-bottom: 0.3rem;
+}
+
+.form-card p {
+  font-size: 0.92rem;
+  color: rgba(247,240,224,0.5);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
 .form-group {
-    margin-bottom: 18px;
+  margin-bottom: 1.4rem;
 }
 
-.form-group label {
-    display: block;
-    font-weight: bold;
-    color: #4b2e2e;
-    margin-bottom: 6px;
-    font-size: 0.95em;
+/* Two-column row for name fields */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #c9a87c;
-    border-radius: 5px;
-    font-family: 'Georgia', serif;
-    font-size: 0.95em;
-    background-color: #fff;
-    color: #333;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4b2e2e;
+/* Form field labels */
+label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.45rem;
+  opacity: 0.85;
 }
 
-.form-group textarea {
-    height: 110px;
-    resize: vertical;
+/* Form inputs, textarea, select */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  background: rgba(247,240,224,0.06);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 3px;
+  color: var(--parchment);
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  padding: 0.65rem 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(201,168,76,0.65);
+}
+
+textarea {
+  height: 110px;
+  resize: vertical;
+}
+
+select option {
+  background: #1a1208;
 }
 
 /* Submit button */
-.submit-btn {
-    background-color: #4b2e2e;
-    color: white;
-    border: none;
-    padding: 12px 28px;
-    font-family: 'Georgia', serif;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+.btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
 }
 
-.submit-btn:hover {
-    background-color: #6b4c4c;
+.btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
 }
 
-/* Success message (hidden until form is submitted) */
-.success-msg {
-    display: none;
-    margin-top: 16px;
-    padding: 12px 16px;
-    background-color: #edf6ec;
-    border: 1px solid #a8d5a2;
-    border-radius: 5px;
-    color: #2e6b2e;
-    font-size: 0.95em;
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Success message shown after form submit */
+.form-success {
+  display: none;
+  margin-top: 1.2rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 3px;
+  background: rgba(201,168,76,0.08);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  text-align: center;
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  border-top: 1px solid rgba(201,168,76,0.15);
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(247,240,224,0.3);
 }
